@@ -3,12 +3,12 @@ package com.haidev.android_mvvm_pattern.main.model
 import com.google.gson.annotations.SerializedName
 
 
-data class MainModel(
+data class MealModel(
     @SerializedName("categories")
-    val categories: List<Category>
+    val categories: List<CategoryMeal>
 )
 
-data class Category(
+data class CategoryMeal(
     @SerializedName("idCategory")
     val idCategory: String,
     @SerializedName("strCategory")

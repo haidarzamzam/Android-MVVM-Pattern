@@ -1,6 +1,6 @@
 package com.haidev.android_mvvm_pattern.networks.repositories
 
-import com.haidev.android_mvvm_pattern.main.model.MainModel
+import com.haidev.android_mvvm_pattern.main.model.MealModel
 import com.haidev.android_mvvm_pattern.networks.ApiObserver
 import com.haidev.android_mvvm_pattern.networks.ServiceFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,14 +12,14 @@ class MealRepository {
     private val apiService = ServiceFactory.create()
 
     fun getMeal(
-        onResult: (MainModel) -> Unit,
+        onResult: (MealModel) -> Unit,
         onError: (Throwable) -> Unit
     ) {
         apiService.getMeal()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : ApiObserver<MainModel>(compositeDisposable) {
-                override fun onApiSuccess(data: MainModel) {
+            .subscribe(object : ApiObserver<MealModel>(compositeDisposable) {
+                override fun onApiSuccess(data: MealModel) {
                     onResult(data)
                 }
 
@@ -27,5 +27,9 @@ class MealRepository {
                     onError(er)
                 }
             })
+    }
+
+    fun cleared() {
+        compositeDisposable.clear()
     }
 }
